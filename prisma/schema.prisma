@@ -23,7 +23,6 @@ model Event {
   slug             String     @unique
   maximumAttendees Int?       @map("maximum_attendees")
   Attendee         Attendee[]
-  ativo            Boolean
 
   @@map("events")
 }
