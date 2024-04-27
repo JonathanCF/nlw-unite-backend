@@ -1,54 +1,72 @@
-import fastify from "fastify";
+import fastify from 'fastify';
+import fastifySwagger from '@fastify/swagger';
+import fastifySwaggerUi from '@fastify/swagger-ui';
+import fastifyCors from '@fastify/cors';
+import { serializerCompiler, validatorCompiler, jsonSchemaTransform, ZodTypeProvider } from 'fastify-type-provider-zod';
+import { errorHandler } from './error-handler';
 
-import fastifySwagger from "@fastify/swagger";
-import fastifySwaggerUi from "@fastify/swagger-ui";
-import fastifyCors from "@fastify/cors";
+// Import routes
+import { createEvent } from './routes/create-event';
+import { registerForEvent } from './routes/register-for-events';
+import { getEvent } from './routes/get-event';
+import { getAttendeeBadge } from './routes/get-attendee-badge';
+import { checkIn } from './routes/check-in';
+import { getEventAttendees } from './routes/get-event.attendees';
+import { getAllEvent } from './routes/get-all-events'
 
-import { serializerCompiler, validatorCompiler, jsonSchemaTransform, ZodTypeProvider } from 'fastify-type-provider-zod'
-import { createEvent, } from "./routes/create-event";
-import { registerForEvent } from "./routes/register-for-events";
-import { getEvent } from './routes/get-event'
-import { getAttendeeBadge } from "./routes/get-attendee-badge";
-import { checkIn } from "./routes/check-in";
-import { getEventAttendees } from "./routes/get-event.attendees";
-import { errorHandler } from "./error-handler";
+const app = fastify().withTypeProvider<ZodTypeProvider>();
 
-export const app = fastify().withTypeProvider<ZodTypeProvider>()
-
+// Plugins
 app.register(fastifyCors, {
-  // 'http://meufrontend.com' informa o local que ira consumir a API
-  origin:'*'
-})
+  origin: '*', // Allow requests from all origins
+});
 
 app.register(fastifySwagger, {
-  swagger:{
+  swagger: {
     consumes: ['application/json'],
     produces: ['application/json'],
     info: {
       title: 'pass.in',
-      description: "Especificações da API para o backend da aplicação pass.in construída durante o NLW Unite da Rocketseat.",
-      version: '1.0.0'
+      description: 'API specifications for the pass.in backend application.',
+      version: '1.0.0',
     },
   },
   transform: jsonSchemaTransform,
-})
+});
 
 app.register(fastifySwaggerUi, {
-  routePrefix: '/docs'
-})
+  routePrefix: '/docs',
+});
 
+// Custom serializers and validators
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
 
-app.register(createEvent)
-app.register(registerForEvent)
-app.register(getEvent)
-app.register(getAttendeeBadge)
-app.register(checkIn)
-app.register(getEventAttendees)
+// Register routes
+app.register(createEvent);
+app.register(getAllEvent)
+app.register(registerForEvent);
+app.register(getEvent);
+app.register(getAttendeeBadge);
+app.register(checkIn);
+app.register(getEventAttendees);
 
-app.setErrorHandler(errorHandler)
 
-app.listen({ port: 3333, host: '0.0.0.0' }).then(() => {
-  console.log("HTTP server running!!");
-});
+// Error handler
+app.setErrorHandler(errorHandler);
+
+// Start the server
+const PORT = process.env.PORT || 3333;
+const HOST = process.env.HOST || '0.0.0.0';
+
+const start = async () => {
+
+  try {
+    await app.listen({ port: 3333 });
+    console.log("Server is run")
+  } catch (err) {
+    process.exit();
+  }
+};
+
+start();
