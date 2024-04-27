@@ -55,18 +55,6 @@ app.register(getEventAttendees);
 // Error handler
 app.setErrorHandler(errorHandler);
 
-// Start the server
-const PORT = process.env.PORT || 3333;
-const HOST = process.env.HOST || '0.0.0.0';
-
-const start = async () => {
-
-  try {
-    await app.listen({ port: 3333 });
-    console.log("Server is run")
-  } catch (err) {
-    process.exit();
-  }
-};
-
-start();
+app.listen({ port: 3333, host: '0.0.0.0' }).then(() => {
+  console.log('HTTP server running!')
+})
