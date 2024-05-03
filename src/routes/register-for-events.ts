@@ -29,7 +29,7 @@ export async function registerForEvent(app: FastifyInstance){
       }
     }, async (request, reply) => {
       const { eventId } = request.params
-      const { name, email, password } = request.body // Incluindo a senha no corpo da requisição
+      const { name, email } = request.body // Incluindo a senha no corpo da requisição
 
       const attendeeFromEmail = await prisma.attendee.findUnique({
         where:{
