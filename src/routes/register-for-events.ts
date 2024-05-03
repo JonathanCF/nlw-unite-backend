@@ -16,7 +16,6 @@ export async function registerForEvent(app: FastifyInstance){
         body: z.object({
           name: z.string().min(4),
           email: z.string().email(),
-          password: z.string()
         }),
         params: z.object({
           eventId: z.string().uuid()
@@ -66,7 +65,6 @@ export async function registerForEvent(app: FastifyInstance){
       const attendeeData = {
         name,
         email,
-        password,
         eventId
       }
 
@@ -86,6 +84,5 @@ export async function registerForEvent(app: FastifyInstance){
 type AttendeeCreateInput = {
   name: string;
   email: string;
-  password: string
   eventId: string;
 }
