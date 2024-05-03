@@ -5,6 +5,7 @@ CREATE TABLE "events" (
     "details" TEXT,
     "slug" TEXT NOT NULL,
     "maximum_attendees" INTEGER,
+    "ativo" BOOLEAN NOT NULL DEFAULT true,
 
     CONSTRAINT "events_pkey" PRIMARY KEY ("id")
 );

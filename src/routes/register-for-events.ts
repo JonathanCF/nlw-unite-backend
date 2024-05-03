@@ -1,13 +1,13 @@
-import { FastifyInstance} from "fastify";
+import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { z } from "zod";
 import { prisma } from "../lib/prisma";
 import { BadRequest } from "./_errors/bad-request";
-
+import { hash } from 'bcryptjs'
 
 export async function registerForEvent(app: FastifyInstance){
   app
-  .withTypeProvider<ZodTypeProvider>()
+    .withTypeProvider<ZodTypeProvider>()
     .post('/events/:eventId/attendees', {
       schema:{
         summary: 'Register an attendee',
@@ -16,6 +16,7 @@ export async function registerForEvent(app: FastifyInstance){
         body: z.object({
           name: z.string().min(4),
           email: z.string().email(),
+          password: z.string()
         }),
         params: z.object({
           eventId: z.string().uuid()
@@ -29,7 +30,7 @@ export async function registerForEvent(app: FastifyInstance){
       }
     }, async (request, reply) => {
       const { eventId } = request.params
-      const { name, email } = request.body
+      const { name, email, password } = request.body // Incluindo a senha no corpo da requisição
 
       const attendeeFromEmail = await prisma.attendee.findUnique({
         where:{
@@ -44,7 +45,6 @@ export async function registerForEvent(app: FastifyInstance){
         throw new BadRequest ('This e-mail is already registered for this event.')
       }
 
-      // Recebe varias funçoes para rodar em paralelo
       const [event, amountOfAttendeesForEvent] = await Promise.all([
         prisma.event.findUnique({
           where:{
@@ -59,17 +59,20 @@ export async function registerForEvent(app: FastifyInstance){
         })
       ])
 
-      // Verifica se ha um maximo de participantes, se SIM impende o cadastro acima
       if(event?.maximumAttendees && amountOfAttendeesForEvent >= event?.maximumAttendees) {
         throw new BadRequest('The maximum number of attendees for this event has been reached.')
       } 
 
+      const attendeeData = {
+        name,
+        email,
+        password,
+        eventId
+      }
+
+      // Força o TypeScript a tratar attendeeData como o tipo esperado
       const attendee = await prisma.attendee.create({
-        data:{
-          name,
-          email,
-          eventId
-        }
+        data: attendeeData as AttendeeCreateInput
       })
 
       return reply.status(201).send({
@@ -77,4 +80,12 @@ export async function registerForEvent(app: FastifyInstance){
         name: attendee.name
       })
     })
+}
+
+// Declare um tipo personalizado para a criação de participantes
+type AttendeeCreateInput = {
+  name: string;
+  email: string;
+  password: string
+  eventId: string;
 }
