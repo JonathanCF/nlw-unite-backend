@@ -21,14 +21,17 @@ export async function getAllAttendees(app: FastifyInstance){
     }
   }, async (request, reply) => {
 
+    const cont = await prisma.attendee.count({
+
+    })
+
     const attendees = await prisma.attendee.findMany({
       select: {
         id: true,
         name: true,
         email: true,
         eventId: true,
-
-      },
+      } 
     })
 
     // Mapeia os eventos para o formato de resposta
