@@ -3,7 +3,7 @@ import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { z } from "zod";
 import { prisma } from "../lib/prisma";
 import { BadRequest } from "./_errors/bad-request";
-import { hash } from 'bcryptjs'
+
 
 export async function registerForEvent(app: FastifyInstance){
   app
@@ -65,7 +65,7 @@ export async function registerForEvent(app: FastifyInstance){
       const attendeeData = {
         name,
         email,
-        eventId
+        eventId,
       }
 
       // Força o TypeScript a tratar attendeeData como o tipo esperado
