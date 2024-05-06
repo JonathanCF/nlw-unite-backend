@@ -16,6 +16,7 @@ import { getEventAttendees } from "./routes/get-event.attendees";
 import { getAllAttendees } from "./routes/get-all-attendees";
 import { getAllCheckIn } from "./routes/get-all-checkIn";
 import { getAllEvent } from "./routes/get-all-events";
+import { validationCredential } from './routes/valdation-credential'
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -52,6 +53,7 @@ app.register(getEventAttendees)
 app.register(getAllAttendees)
 app.register(getAllCheckIn)
 app.register(getAllEvent)
+app.register(validationCredential)
 
 app.setErrorHandler(errorHandler)
 
