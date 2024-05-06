@@ -1,20 +1,21 @@
-  import { FastifyInstance } from "fastify";
-  import { ZodTypeProvider } from "fastify-type-provider-zod";
-  import { z } from 'zod'
-  import { prisma } from "../lib/prisma"
-  import { BadRequest } from "./_errors/bad-request";
+import { FastifyInstance } from "fastify";
+import { ZodTypeProvider } from "fastify-type-provider-zod";
+import { z } from 'zod'
+import { prisma } from "../lib/prisma"
+import { BadRequest } from "./_errors/bad-request";
 
-  interface RequestBody {
-    id: number;
-    name: string
-  }
+// Interface para o corpo da requisição
+interface RequestBody {
+  id: number;
+  name: string;
+}
 
-  export async function validationCredential(app: FastifyInstance){
-    app
+export async function validationCredential(app: FastifyInstance){
+  app
     .withTypeProvider<ZodTypeProvider>()
     .post('/credential' ,{
       schema:{
-        summary: 'Get all event',
+        summary: 'Validate attendee credential',
         tags: ['attendees'],
         description: 'Validar credencial do participante', 
         response:{
@@ -26,30 +27,31 @@
       }
     }, async (request, reply) => {
       try {
-      const { id } = request.body as RequestBody
+        // Verifica se a propriedade 'id' está presente no corpo da requisição
+        const { id } = request.body as RequestBody;
 
-      const credential = await prisma.attendee.findUnique({
-        where:{
-          id
-        },
-        select:{
-          id: true,
-          name: true
+        // Busca o participante no banco de dados
+        const credential = await prisma.attendee.findUnique({
+          where: { id },
+          select: { id: true, name: true }
+        });
+
+        // Se não encontrar o participante, emite um BadRequest
+        if (!credential) {
+          throw new BadRequest('Participante não cadastrado');
         }
-      })
 
-      if(!credential){
-        throw new BadRequest('Participante não cadastrado')
-      }
-
-      return reply.status(200).send({
-        id: credential.id,
-        name: credential.name
-
-      });
+        // Se encontrar, retorna id e name
+        return reply.status(200).send({
+          id: credential.id,
+          name: credential.name
+        });
 
       } catch (error) {
-        console.log(error)
+        // Em caso de erro, loga o erro
+        console.error(error);
+        // Emite um BadRequest com mensagem genérica
+        throw new BadRequest('Erro ao validar credencial');
       }    
     })
-  }
+}
