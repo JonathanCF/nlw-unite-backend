@@ -23,13 +23,16 @@
         }
       }
     }, async (request, reply) => {
-
-
+      try {
       const { id } = request.body as RequestBody
 
       const credential = await prisma.attendee.findUnique({
         where:{
           id
+        },
+        select:{
+          id: true,
+          name: true
         }
       })
 
@@ -37,6 +40,13 @@
         throw new BadRequest('Participante não cadastrado')
       }
 
-      return reply.status(200).send();
-    })
+      return reply.status(200).send({
+        id,
+
+      });
+
+      } catch (error) {
+        throw new BadRequest('Participante não cadastrado')
+      }    }
+  )
   }
