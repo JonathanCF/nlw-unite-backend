@@ -17,7 +17,10 @@ export async function validationCredential(app: FastifyInstance){
       schema:{
         summary: 'Validate attendee credential',
         tags: ['attendees'],
-        description: 'Validar credencial do participante', 
+        description: 'Validar credencial do participante',
+        body: z.object({
+          attendeeId: z.coerce.number().int(),
+        }), 
         params: z.object({
           attendeeId: z.coerce.number().int(),
         }),
