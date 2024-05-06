@@ -6,6 +6,7 @@
 
   interface RequestBody {
     id: number;
+    name: string
   }
 
   export async function validationCredential(app: FastifyInstance){
@@ -18,7 +19,8 @@
         description: 'Validar credencial do participante', 
         response:{
           200: z.object({
-            id: z.number()
+            id: z.number(),
+            name: z.string()
           })
         }
       }
@@ -36,11 +38,13 @@
         }
       })
 
-      if(credential){
+      if(!credential){
         throw new BadRequest('Participante não cadastrado')
       }
+
       return reply.status(200).send({
-        id,
+        id: credential.id,
+        name: credential.name
 
       });
 
