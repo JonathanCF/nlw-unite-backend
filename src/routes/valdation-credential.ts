@@ -6,21 +6,24 @@ import { BadRequest } from "./_errors/bad-request";
 
 // Interface para o corpo da requisição
 interface RequestBody {
-  id: number;
+  attendeeId: number;
   name: string;
 }
 
 export async function validationCredential(app: FastifyInstance){
   app
     .withTypeProvider<ZodTypeProvider>()
-    .post('/credential' ,{
+    .get('/credential/:attendeeId' ,{
       schema:{
         summary: 'Validate attendee credential',
         tags: ['attendees'],
         description: 'Validar credencial do participante', 
+        params:{
+          attendeeId: z.coerce.number().int(),
+        },
         response:{
           200: z.object({
-            id: z.number(),
+            attendeeId: z.number(),
             name: z.string()
           })
         }
@@ -28,11 +31,11 @@ export async function validationCredential(app: FastifyInstance){
     }, async (request, reply) => {
       try {
         // Verifica se a propriedade 'id' está presente no corpo da requisição
-        const { id } = request.body as RequestBody;
+        const { attendeeId } = request.params as RequestBody;
 
         // Busca o participante no banco de dados
         const credential = await prisma.attendee.findUnique({
-          where: { id },
+          where: { id: attendeeId },
           select: { id: true, name: true }
         });
 
@@ -43,7 +46,7 @@ export async function validationCredential(app: FastifyInstance){
 
         // Se encontrar, retorna id e name
         return reply.status(200).send({
-          id: credential.id,
+          attendeeId: credential.id,
           name: credential.name
         });
 
