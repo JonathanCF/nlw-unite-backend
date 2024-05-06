@@ -36,13 +36,16 @@
         }
       })
 
+      if(credential){
+        throw new BadRequest('Participante não cadastrado')
+      }
       return reply.status(200).send({
         id,
 
       });
 
       } catch (error) {
-        throw new BadRequest('Participante não cadastrado')
-      }    }
-  )
+        console.log(error)
+      }    
+    })
   }
