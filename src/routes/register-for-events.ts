@@ -16,6 +16,8 @@ export async function registerForEvent(app: FastifyInstance){
         body: z.object({
           name: z.string().min(4),
           email: z.string().email(),
+          age: z.number().nullable(),
+          gender: z.string().nullable()
         }),
         params: z.object({
           eventId: z.string().uuid()
@@ -23,13 +25,15 @@ export async function registerForEvent(app: FastifyInstance){
         response:{
           201: z.object({
             attendeeId: z.number(),
-            name: z.string()
+            name: z.string(),
+            age: z.number().nullable(),
+            gender: z.string().nullable()
           })
         }
       }
     }, async (request, reply) => {
       const { eventId } = request.params
-      const { name, email } = request.body // Incluindo a senha no corpo da requisição
+      const { name, email, age, gender } = request.body // Incluindo a senha no corpo da requisição
 
       const attendeeFromEmail = await prisma.attendee.findUnique({
         where:{
@@ -66,6 +70,8 @@ export async function registerForEvent(app: FastifyInstance){
         name,
         email,
         eventId,
+        age,
+        gender
       }
 
       // Força o TypeScript a tratar attendeeData como o tipo esperado
@@ -75,8 +81,10 @@ export async function registerForEvent(app: FastifyInstance){
 
       return reply.status(201).send({
         attendeeId: attendee.id,
-        name: attendee.name
-      })
+        name: attendee.name,
+        age: attendee.age !== null ? attendee.age : null,
+        gender: attendee.gender !== null ? attendee.gender : null
+      });
     })
 }
 
@@ -85,4 +93,6 @@ type AttendeeCreateInput = {
   name: string;
   email: string;
   eventId: string;
+  age: number;
+  gender: string
 }
