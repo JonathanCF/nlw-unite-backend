@@ -16,6 +16,8 @@ export async function getAllAttendees(app: FastifyInstance){
           eventId: z.string().uuid(),
           name: z.string(),
           email: z.string(),
+          age: z.number().nullable(),
+          gender: z.string().nullable()
         }))
       }
     }
@@ -30,6 +32,8 @@ export async function getAllAttendees(app: FastifyInstance){
         id: true,
         name: true,
         email: true,
+        age: true,
+        gender: true,
         eventId: true,
       } 
     })
@@ -39,6 +43,8 @@ export async function getAllAttendees(app: FastifyInstance){
       id: attendee.id,
       name: attendee.name,
       email: attendee.email,
+      age: attendee.age,
+      gender: attendee.gender,
       eventId: attendee.eventId,
     }));
 
