@@ -22,6 +22,8 @@ export async function getAttendeeBadge(app: FastifyInstance){
                   id: z.number(),
                   name: z.string(),
                   email: z.string().email(),
+                  age: z.number().nullable(),
+                  gender: z.string().nullable(),
                   eventTitle: z.string(),
                   checkInURL: z.string().url()
                 })
@@ -36,6 +38,8 @@ export async function getAttendeeBadge(app: FastifyInstance){
               id: true,
               name: true,
               email: true,
+              age: true,
+              gender: true,
               event:{
                 select:{
                   title: true
@@ -60,6 +64,8 @@ export async function getAttendeeBadge(app: FastifyInstance){
               id: attendee.id,
               name: attendee.name,
               email: attendee.email,
+              age: attendee.age,
+              gender: attendee.gender,
               eventTitle: attendee.event.title,
               // transformar de classe para string
               checkInURL: checkInURL.toString()
