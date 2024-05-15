@@ -19,9 +19,13 @@ O sistema fará um scan da credencial do participante para permitir a entrada no
 
 ### Requisitos funcionais
 
+**Web**
 - [x] O organizador deve poder cadastrar um novo evento;
 - [x] O organizador deve poder visualizar dados de um evento;
-- [x] O organizador deve poser visualizar a lista de participantes;
+- [x] O organizador deve poder visualizar a lista de participantes;
+- [x] O organizador deve poder visualizar a lista dos eventos;
+
+**Mobile**
 - [x] O participante deve poder se inscrever em um evento;
 - [x] O participante deve poder visualizar seu crachá de inscrição;
 - [x] O participante deve poder realizar check-in no evento.
@@ -56,51 +60,63 @@ Codigo, exemplos
 
 ## 📦 Tecnologias usadas:
 
-Coloque aqui as ferramentas que você usou para criar seu projeto, exemplo:
-
-* ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
-* ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-* ![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
-
-- Link para pegar as badges: https://github.com/Ileriayo/markdown-badges
-
-Ou pode separar por stacks:
-
 **Front-end:**
-* [React JS](https://react.dev/)
-* [TailwindCSS](https://tailwindcss.com/)
+##Escolhi a plataforma No code Bubble.io para o desenvolvimento do frontend para o projeto pass.in, devido à agilidade e foco no desenvolvimento do front end, permitindo uma implementação rápida e eficiente.
+
 
 **Back-end:**
-* ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
-* ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
-* ![Zod](https://img.shields.io/badge/zod-%233068b7.svg?style=for-the-badge&logo=zod&logoColor=white)
-* ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
-* ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
 
-## 👷 Autores
+Para o backend, foram utilizadas as seguintes tecnologias:
 
-Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início, colaboradores.
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 
-* **Nome do dev** - *Função realizada* - [nome_do_dev](https://github.com/link_do_Perfil)
-* **Sujeito Programador** - *Frontend do projeto* - [@sujeitoprogramador](https://github.com/devfraga)
+**Node.js**: Plataforma JavaScript do lado do servidor.
+  
+![Fastify](https://img.shields.io/badge/fastify-%23000000.svg?style=for-the-badge&logo=fastify&logoColor=white)
 
-## 📄 Licença
+**Fastify**: Framework web rápido e eficiente para Node.js, utilizado para o gerenciamento das rotas.
 
-Esse projeto está sob a licença (nome da licença) - acesse os detalhes [LICENSE.md](https://github.com/link_da_licenca).
+![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white) 
+
+**Prisma.io**: ORM (Object-Relational Mapping) para comunicação com o banco de dados, integrado com o Supabase.
+
+![Zod](https://img.shields.io/badge/zod-%233068b7.svg?style=for-the-badge&logo=zod&logoColor=white)  
+
+**Zod**: Biblioteca para validação de dados em JavaScript/TypeScript.
+
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)  
+
+**Supabase**: Banco de dados utilizado como backend-as-a-service.
+
+![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)  
+
+**Render**: Plataforma de hospedagem web utilizada para o deploy do projeto.
+
 
 ## 💭 FAQ - Perguntas frequentes
 
-#### Questão 1
+### 1. Vai me ajudar na desorganização?
+**Resposta:** Sim, o sistema proposto oferece um método centralizado de cadastro para eventos e participantes, permitindo registrar informações detalhadas e garantindo uma entrada mais eficiente e organizada.
 
-Resposta 1
+### 2. Tenho visualização dos dados?
+**Resposta:** Sim, através do Power BI é possível visualizar relatórios para acompanhar o fluxo de entrada de participantes.
 
-#### Questão 2
-
-Resposta 2
+### 3. O que isso agrega na experiência do usuário?
+**Resposta:** O sistema oferece um cadastro prévio com códigos QR exclusivos para os participantes. No dia do evento, esses códigos serão escaneados, garantindo uma entrada rápida e sem complicações, melhorando a experiência geral.
 
 
 ## 💡 Expressões de gratidão
 
-* Um agradecimento publicamente.
-* Para suporte, mande um email para nome@teste.com.
-* Link para o seu linkedin [Meu linkedin](https://url_do_link)
+Obrigado por visitar este projeto! Sua presença aqui é muito importante.
+
+Este projeto é de grande importância para o meu aprendizado em desenvolvimento de software. Ao longo do processo de criação, pude adquirir habilidades valiosas em diversas tecnologias e metodologias de desenvolvimento. Desde a escolha das ferramentas até a implementação, cada etapa foi uma oportunidade de aprendizado e crescimento.
+
+Espero que este projeto também possa ser útil para você de alguma forma. Sinta-se à vontade para explorar o código, sugerir melhorias ou até mesmo contribuir com novas ideias. O desenvolvimento de software é uma jornada colaborativa e estou muito feliz por compartilhar este projeto com você.
+
+Mais uma vez, obrigado por dedicar seu tempo aqui.
+
+Atenciosamente,
+
+* Para dúvidas ou contato, mande um email para jonathanf439@gmail.com
+* [Meu linkedin] (https://www.linkedin.com/in/jonathancferreira/)
