@@ -45,18 +45,31 @@ Para documentação da API, acesse o link: https://nlw-unite-backend.onrender.co
 
 ### 🔨 Guia de instalação
 
-Explique aqui um passo a passo mostrando como deve executar para ter um ambiente de desenvolvimento em execução, desde instalar e rodar o projeto.
-
 Etapas para instalar:
 
+Clonar repositório
 ```
-Codigo, exemplos
+https://github.com/JonathanCF/nlw-unite-backend.git
 ```
 Passo 2:
+Criar um arquivo chamado .env
+
+Passo 3:
+Criar variavel:
+DATABASE_URL="file:./dev.db"
+
+Passo 5:
+Instalar as dependencias
 ```
-Codigo, exemplos
+npm i
 ```
 
+Passo 9:
+No terminal rodar o comando:
+```
+npx prisma db seed
+```
+Para popular o banco com dados fakers em banco de dados SQLite
 
 ## 📦 Tecnologias usadas:
 
