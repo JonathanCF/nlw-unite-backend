@@ -7,6 +7,10 @@
 
 É uma aplicação de gestão de participantes em eventos presenciais.
 
+Segue link para acesso:
+
+### https://nlw-unite.bubbleapps.io/version-test
+
 ## 🔥 Introdução
 
 A ferramenta permite que o organizador cadastre um evento e abra uma página pública de inscrição.
@@ -47,37 +51,62 @@ Para documentação da API, acesse o link: https://nlw-unite-backend.onrender.co
 
 Etapas para instalar:
 
+### Passo 1:
 Clonar repositório
 ```
-https://github.com/JonathanCF/nlw-unite-backend.git
+git clone https://github.com/JonathanCF/nlw-unite-backend.git
 ```
-Passo 2:
-Criar um arquivo chamado .env
+### Passo 2:
+Na pasta prisma/schema.prisma
 
-Passo 3:
-Criar variavel:
-DATABASE_URL="file:./dev.db"
+### Substitua:
 
-Passo 5:
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  // directUrl = env("DIRECT_URL")
+}
+
+### por
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+Você fará a conexão com o banco de dados SQLite
+
+### Passo 3:
+Exclua a pasta
+### migrations
+
+
+### Passo 4:
 Instalar as dependencias
 ```
 npm i
 ```
 
-Passo 9:
+Passo 5:
 No terminal rodar o comando:
 ```
-npx prisma db seed
+npx prisma migrate dev
 ```
-Para popular o banco com dados fakers em banco de dados SQLite
+ We need to reset the SQLite database "dev.db" at "file:./dev.db"
+Do you want to continue? All data will be lost. » (y/N) **y**
+
+Enter a name for the new migration: new table
+
+Criar as tabelas no banco de dados
+
 
 ## 📦 Tecnologias usadas:
 
-**Front-end:**
-##Escolhi a plataforma No code Bubble.io para o desenvolvimento do frontend para o projeto pass.in, devido à agilidade e foco no desenvolvimento do front end, permitindo uma implementação rápida e eficiente.
+## Front-end:
 
+Escolhi a plataforma **No code Bubble.io** para o desenvolvimento do frontend para o projeto pass.in, devido o foco no desenvolvimento do back-end, permitindo uma implementação rápida e eficiente.
 
-**Back-end:**
+## Back-end:
 
 Para o backend, foram utilizadas as seguintes tecnologias:
 
