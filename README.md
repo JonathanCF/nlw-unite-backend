@@ -21,6 +21,10 @@ O sistema fará um scan da credencial do participante para permitir a entrada no
 
 # ⚙️ Requisitos
 
+<div align="center">
+<a href="https://ibb.co/M2PtbmR"><img src="https://i.ibb.co/YRf16xt/Fluxo-Grama-nwl-Unite.png" alt="Fluxo-Grama-nwl-Unite" border="0"></a>
+</div>
+
 ### Requisitos funcionais
 
 **Web**
@@ -138,7 +142,7 @@ Para o backend, foram utilizadas as seguintes tecnologias:
 
 ## 💭 FAQ - Perguntas frequentes
 
-### 1. Vai me ajudar na desorganização?
+### 1. Vai me ajudar na organização?
 **Resposta:** Sim, o sistema proposto oferece um método centralizado de cadastro para eventos e participantes, permitindo registrar informações detalhadas e garantindo uma entrada mais eficiente e organizada.
 
 ### 2. Tenho visualização dos dados?
